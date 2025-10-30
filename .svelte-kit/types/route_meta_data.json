@@ -6,6 +6,9 @@
 	"/changelog": [
 		"src/routes/+layout.ts"
 	],
+	"/claim": [
+		"src/routes/claim/+server.ts"
+	],
 	"/credits": [
 		"src/routes/+layout.ts"
 	],

@@ -182,6 +182,51 @@ function createGameStore() {
       saveGame(newState);
     },
 
+    mintTokens: async (wallet: string, amount: number): Promise<{ success: boolean; transactionHash?: string; error?: string }> => {
+      try {
+        if (!wallet || !/^0x[a-fA-F0-9]{40}$/.test(wallet)) {
+          return { success: false, error: 'Dirección de wallet inválida' };
+        }
+
+        if (!amount || amount <= 0) {
+          return { success: false, error: 'La cantidad debe ser mayor a 0' };
+        }
+
+        const response = await fetch('/claim', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            wallet,
+            amount,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          return { 
+            success: false, 
+            error: data.error || `Error ${response.status}: ${response.statusText}` 
+          };
+        }
+
+        alert(`Tokens minteados correctamente en: https://scroll-sepolia.blockscout.com/tx/${data.transactionHash}`);
+
+        return {
+          success: true,
+          transactionHash: data.transactionHash,
+        };
+      } catch (error) {
+        console.error('Error al mintear tokens:', error);
+        return {
+          success: false,
+          error: error instanceof Error ? error.message : 'Error desconocido al mintear tokens',
+        };
+      }
+    },
+
     hardReset: () => {
       set(createInitialState());
       saveGame(createInitialState());

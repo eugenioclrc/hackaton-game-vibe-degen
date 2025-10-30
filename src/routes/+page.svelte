@@ -11,7 +11,7 @@
   let showRebootModal = false;
   let showResetDialog = false;
 
-  $: unlockedBuildings = BUILDINGS.filter((b) => $gameStore.unlocked.has(b.id));
+  $: unlockedBuildings = BUILDINGS.filter((b) => $gameStore.unlocked && $gameStore.unlocked.has && $gameStore.unlocked.has(b.id));
   $: tokenPerSec = calculateTokenPerSec();
 
   function calculateTokenPerSec(): number {
@@ -106,15 +106,11 @@
           <small>+{formatNumber(tokenPerSec)}/s</small>
         </div>
       </div>
-      
-      <div class="stats">
-        <small>Total: {formatNumber($gameStore.totalEarned)}</small>
-        <small>Reboots: {$gameStore.reboots}</small>
-      </div>
-
+      {#if $gameStore.resources.TOKEN && $gameStore.resources.TOKEN > 0}
       <div class="actions">
-        <button class="nes-btn is-primary" on:click={() => gameStore.manualSave()}>Guardar</button>
-      </div>
+          <button class="nes-btn is-warning" on:click={openReboot}>HALVING</button>
+        </div>
+      {/if}
     </section>
 
     <section class="faucet-section nes-container">
@@ -136,6 +132,7 @@
         >
           Edificios
         </button>
+       <!--
         <button
           class="nes-btn"
           class:is-primary={activeTab === 'upgrades'}
@@ -143,12 +140,13 @@
         >
           Upgrades
         </button>
+        -->
       </div>
 
       <div class="tab-content">
         {#if activeTab === 'buildings'}
           <div class="buildings-list">
-            {#each unlockedBuildings as building (building.id)}
+            {#each BUILDINGS as building (building.id)}
               <BuildingCard {building} />
             {/each}
           </div>
@@ -161,7 +159,6 @@
 
   <footer class="footer nes-container">
     <div class="prestige-actions">
-      <button class="nes-btn is-warning" on:click={openReboot}>REBOOT</button>
       <button class="nes-btn is-error" on:click={openReset}>Reset Duro</button>
     </div>
 

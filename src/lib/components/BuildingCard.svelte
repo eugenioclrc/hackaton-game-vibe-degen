@@ -5,7 +5,7 @@
 
   export let building: BuildingDef;
 
-  $: owned = $gameStore.owned[building.id] || 0;
+  $: owned = $gameStore.owned && $gameStore.owned[building.id] || 0;
   $: cost = calculateBuildingCost(building, owned);
   $: affordable = canAfford(cost, $gameStore.resources);
 
@@ -66,6 +66,9 @@
 </div>
 
 <style>
+  .title {
+    background-color: #000;
+  }
   .building-card {
     margin-bottom: 1rem;
   }

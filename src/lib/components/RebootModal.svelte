@@ -1,14 +1,25 @@
 <script lang="ts">
   import { gameStore } from '../stores/game';
+import { onMount } from 'svelte';
 
   export let show = false;
 
   let walletAddress = '';
+  onMount(() => {
+    walletAddress = localStorage.getItem('walletAddress') || '';
+  });
+  
+  async function confirm() {
+    // mint tokens if walletAddress is provided
+    if (walletAddress) {
 
-  function confirm() {
+      await gameStore.mintTokens(walletAddress, $gameStore.resources.TOKEN);
+      localStorage.setItem('walletAddress', walletAddress);
+    }
     gameStore.reboot(walletAddress || undefined);
     show = false;
     walletAddress = '';
+
   }
 
   function cancel() {

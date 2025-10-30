@@ -65,11 +65,6 @@
     {/each}
   </div>
 
-  <div class="bonus-info">
-    <small>Clout: +{($gameStore.cloutBonus * 100).toFixed(0)}%</small>
-    <small>Hash: +{($gameStore.hashrateBonus * 100).toFixed(0)}%</small>
-    <small>Global: +{($gameStore.globalBonus * 100).toFixed(0)}%</small>
-  </div>
 
   <div class="actions">
     <button class="nes-btn is-primary" on:click={handleSave}>Guardar</button>
