@@ -65,7 +65,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 
 		// Convertir amount a wei (ajustar decimales según tu token, aquí asumo 18)
-		const amountInWei = amount;
+		const amountInWei = parseInt(amount.toString());
 
 		// Verificar que el contrato esté configurado
 		if (CONTRACT_ADDRESS === '0x...') {
