@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  --primary-color: #209cee;
+  --success-color: #92cc41;
+  --warning-color: #f7d51d;
+  --error-color: #e76e55;
+  --dark-bg: #212529;
+  --accent-color: #ff394a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Press Start 2P', cursive;
+  background-color: var(--dark-bg);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.5;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+body {
+  min-width: 360px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 1rem 0;
+}
+
+p {
+  margin: 0 0 1rem 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--success-color);
+}
+
+.nes-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nes-container.is-dark {
+  background-color: #1a1d23;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  html,
+  body {
+    font-size: 10px;
+  }
+}
